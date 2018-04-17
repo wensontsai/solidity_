@@ -12,12 +12,11 @@ const web3 = new Web3(ganache.provider()); // instance
 // (2) Web3 to interact with deployed contract on network.
 // Each instance can interact with another network.
 // Pass Provider, the communication layer to talk to network.
-beforeEach(() => {
+let accounts;
+
+beforeEach(async () => {
     // Get a list of all 10 accounts for dev purposes.
-    web3.eth.getAccounts()
-        .then(fetchedAccounts => {
-            console.log(fetchedAccounts);
-        });
+    accounts = await web3.eth.getAccounts();
 
     // Use one of accounts to deploy contract.
     
@@ -27,6 +26,6 @@ beforeEach(() => {
 // (4) Assert contract change persisted and is correct.
 describe('Inbox', () => {
     it('deploys a contract', () => {
-
+        console.log(accounts);
     }); 
 });
