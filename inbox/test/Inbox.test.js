@@ -2,6 +2,8 @@ const assert = require('assert');
 const ganache = require('ganache-cli');
 const Web3 = require('web3'); // constructor function here.
 const web3 = new Web3(ganache.provider()); // instance
+const { interface, bytecode } = require('../compile');
+    
 
 // (1) Deploy contract to local test network. 
 // Generate local network for testing only.
@@ -19,13 +21,21 @@ beforeEach(async () => {
     accounts = await web3.eth.getAccounts();
 
     // Use one of accounts to deploy contract.
-    
+    inbox = await new web3.eth.Contract(JSON.parse(interface))
+        .deploy({   
+            data: bytecode,
+            arguments: ['Hi there!']    
+        })
+        .send({ 
+            from: accounts[0],
+            gas: '1000000'
+        })
 });
 
 // (3) Manipulate contract
 // (4) Assert contract change persisted and is correct.
 describe('Inbox', () => {
     it('deploys a contract', () => {
-        console.log(accounts);
+        console.log(inbox);
     }); 
 });
