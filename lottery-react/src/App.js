@@ -17,7 +17,7 @@ class App extends Component {
   async componentWillMount() {
     const manager = await lottery.methods.manager().call();
     const players = await lottery.methods.getPlayers().call();
-    const balance = await web3.eth.getBalance();
+    const balance = await web3.eth.getBalance(lottery.options.address);
 
    	this.setState({ manager, players, balance });
   }
@@ -64,7 +64,7 @@ class App extends Component {
         <h2>Lottery Contract</h2>
         <p>
           This contract is managed by {this.state.manager}.
-          There are currently {this.state.players.length} players entered and competing to win {web.utils.fromWei({this.state.balance, 'ether'})} ether!
+          There are currently {this.state.players.length} players entered and competing to win {web3.utils.fromWei(this.state.balance, 'ether')} ether!
         </p>
 
         <hr/>
