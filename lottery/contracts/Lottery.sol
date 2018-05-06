@@ -53,6 +53,9 @@ contract Lottery {
         // .transfer is Global variable.
         // this.balance is given for class.
         players[index].transfer(this.balance);
+
+        // address of winner.
+        lastWinner = players[index];
         
         // Clear out players array for next lottery.
         // Construct with size 0.

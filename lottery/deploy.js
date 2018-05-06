@@ -30,6 +30,7 @@ const deploy = async () => {
             from: accounts[0] 
         });
 
+    console.log(interface);
     // peek contract.
     console.log('Contract deployed to ', result.options.address);
 };
